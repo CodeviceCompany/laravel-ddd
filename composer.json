@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "codevicecompany/laravel-ddd",
+    "description": "This is my package laravel-ddd",
     "keywords": [
-        ":vendor_name",
+        "codevicecompany",
         "laravel",
-        ":package_slug"
+        "laravel-ddd"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/codevicecompany/laravel-ddd",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Amine TIYAL",
+            "email": "aminetiyal@gmail.com",
             "role": "Developer"
         }
     ],
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "CodeviceCompany\\LaravelDdd\\": "src/",
+            "CodeviceCompany\\LaravelDdd\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "CodeviceCompany\\LaravelDdd\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -61,10 +61,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "CodeviceCompany\\LaravelDdd\\LaravelDddServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "LaravelDdd": "CodeviceCompany\\LaravelDdd\\Facades\\LaravelDdd"
             }
         }
     },
