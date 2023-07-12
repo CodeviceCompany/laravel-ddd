@@ -18,8 +18,6 @@ class LaravelDddServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-ddd')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel-ddd_table')
             ->hasCommand(LaravelDddCommand::class);
     }
 }
