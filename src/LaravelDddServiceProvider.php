@@ -38,6 +38,7 @@ class LaravelDddServiceProvider extends PackageServiceProvider
 
                 Commands\MiddlewareMakeCommand::class,
                 Commands\ControllerMakeCommand::class,
+                Commands\FactoryMakeCommand::class,
             ]);
     }
 }

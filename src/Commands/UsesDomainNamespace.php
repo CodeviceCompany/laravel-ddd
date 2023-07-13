@@ -10,7 +10,7 @@ trait UsesDomainNamespace
     protected function rootNamespace(): string
     {
         if ($this->isCommandRegistered() && $this->option('domain')) {
-            return str($this->option('domain'))->finish('\\')->toString();
+            return str($this->option('domain'))->finish('\\')->prepend('Domain\\')->toString();
         }
 
         return parent::rootNamespace();
@@ -69,12 +69,8 @@ trait UsesDomainNamespace
     protected function isCommandRegistered(?string $command = null): bool
     {
         $commandNames = array_keys(config('ddd.commands'));
-        if ($command) {
-            ray($command)->red();
-            return in_array($command, $commandNames);
-        }
-        ray($this->getName())->green();
-        return in_array($this->getName(), $commandNames);
+        $command = $command ?? $this->getName();
+        return in_array($command, $commandNames);
     }
 
     protected function appendArgumentsWithDomain(array $array): array
