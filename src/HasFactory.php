@@ -18,13 +18,14 @@ trait HasFactory
         $factory = static::newFactory() ?: self::factoryForModel();
 
         return $factory
-                    ->count(is_numeric($count) ? $count : null)
-                    ->state(is_callable($count) || is_array($count) ? $count : $state);
+            ->count(is_numeric($count) ? $count : null)
+            ->state(is_callable($count) || is_array($count) ? $count : $state);
     }
 
     private static function factoryForModel()
     {
-        $class = str_replace('Models', 'Factories', get_called_class()) . 'Factory';
+        $class = str_replace('Models', 'Factories', get_called_class()).'Factory';
+
         return $class::new();
     }
 

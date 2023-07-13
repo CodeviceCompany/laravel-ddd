@@ -18,18 +18,19 @@ trait UsesDomainNamespace
 
     protected function getPath($name): string
     {
-        if (!$this->isCommandRegistered()) {
+        if (! $this->isCommandRegistered()) {
             return parent::getPath($name);
         }
 
-        $name = str_replace('\\', '/', Str::replaceFirst($this->rootNamespace(), '', $name)) . '.php';
+        $name = str_replace('\\', '/', Str::replaceFirst($this->rootNamespace(), '', $name)).'.php';
         $namespace = str_replace('\\', '/', $this->rootNamespace());
-        return 'src/' . $namespace . $name;
+
+        return 'src/'.$namespace.$name;
     }
 
     protected function getOptions(): array
     {
-        if (!$this->isCommandRegistered()) {
+        if (! $this->isCommandRegistered()) {
             return parent::getOptions();
         }
 
@@ -47,7 +48,7 @@ trait UsesDomainNamespace
         $class = get_class($this);
         $isCommandRegistered = in_array($class, $commandClasses);
 
-        if (!$isCommandRegistered) {
+        if (! $isCommandRegistered) {
             return parent::getName();
         }
 
@@ -56,7 +57,7 @@ trait UsesDomainNamespace
 
     public function call($command, array $arguments = [])
     {
-        if (!$this->isCommandRegistered($command)) {
+        if (! $this->isCommandRegistered($command)) {
             return parent::call($command, $arguments);
         }
 
@@ -73,16 +74,17 @@ trait UsesDomainNamespace
     //******************************************
     // Helpers
     //******************************************
-    protected function isCommandRegistered(?string $command = null): bool
+    protected function isCommandRegistered(string $command = null): bool
     {
         $commandNames = array_keys(config('ddd.commands'));
         $command = $command ?? $this->getName();
+
         return in_array($command, $commandNames);
     }
 
     protected function appendArgumentsWithDomain(array $array): array
     {
-        if (!$this->isCommandRegistered()) {
+        if (! $this->isCommandRegistered()) {
             return $array;
         }
 
