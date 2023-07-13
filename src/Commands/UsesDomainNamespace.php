@@ -38,9 +38,25 @@ trait UsesDomainNamespace
             ->all();
     }
 
+    public function getName(): ?string
+    {
+        /*
+         * To avoid infinite loop, we need to check if the command is registered manually. here
+         */
+        $commandClasses = config('ddd.commands');
+        $class = get_class($this);
+        $isCommandRegistered = in_array($class, $commandClasses);
+
+        if (!$isCommandRegistered) {
+            return parent::getName();
+        }
+
+        return array_search(get_class($this), config('ddd.commands'));
+    }
+
     public function call($command, array $arguments = [])
     {
-        if (!$this->isCommandRegistered()) {
+        if (!$this->isCommandRegistered($command)) {
             return parent::call($command, $arguments);
         }
 
@@ -52,9 +68,13 @@ trait UsesDomainNamespace
     //******************************************
     protected function isCommandRegistered(?string $command = null): bool
     {
-        $commandClasses = config('ddd.commands');
-        $class = get_class($this);
-        return in_array($class, $commandClasses);
+        $commandNames = array_keys(config('ddd.commands'));
+        if ($command) {
+            ray($command)->red();
+            return in_array($command, $commandNames);
+        }
+        ray($this->getName())->green();
+        return in_array($this->getName(), $commandNames);
     }
 
     protected function appendArgumentsWithDomain(array $array): array
