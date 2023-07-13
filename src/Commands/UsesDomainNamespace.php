@@ -63,6 +63,13 @@ trait UsesDomainNamespace
         return $this->runCommand($command, $this->appendArgumentsWithDomain($arguments), $this->output);
     }
 
+    protected function resolveStubPath($stub)
+    {
+        return file_exists($customPath = $this->laravel->basePath(trim($stub, '/')))
+            ? $customPath
+            : __DIR__.$stub;
+    }
+
     //******************************************
     // Helpers
     //******************************************
