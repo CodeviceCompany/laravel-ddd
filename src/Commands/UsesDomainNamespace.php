@@ -95,4 +95,14 @@ trait UsesDomainNamespace
 
         return $array;
     }
+
+    protected function getDomainNamespace(): string
+    {
+        if (! $this->isCommandRegistered()) {
+            return '';
+        }
+
+        $namespace = str_replace('/', '\\', $this->rootNamespace());
+        return rtrim($namespace, '\\');
+    }
 }

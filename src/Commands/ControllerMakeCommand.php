@@ -39,4 +39,38 @@ class ControllerMakeCommand extends BaseCommand
 
         return $this->replaceNamespace($stub, $name)->replaceClass($stub, $name);
     }
+
+    protected function buildFormRequestReplacements(array $replace, $modelClass): array
+    {
+        [$namespace, $storeRequestClass, $updateRequestClass] = [
+            'Illuminate\\Http', 'Request', 'Request',
+        ];
+
+        if ($this->option('requests')) {
+            $namespace = $this->getDomainNamespace().'\\Http\\Requests';
+
+            [$storeRequestClass, $updateRequestClass] = $this->generateFormRequests(
+                $modelClass, $storeRequestClass, $updateRequestClass
+            );
+        }
+
+        $namespacedRequests = $namespace.'\\'.$storeRequestClass.';';
+
+        if ($storeRequestClass !== $updateRequestClass) {
+            $namespacedRequests .= PHP_EOL.'use '.$namespace.'\\'.$updateRequestClass.';';
+        }
+
+        return array_merge($replace, [
+            '{{ storeRequest }}' => $storeRequestClass,
+            '{{storeRequest}}' => $storeRequestClass,
+            '{{ updateRequest }}' => $updateRequestClass,
+            '{{updateRequest}}' => $updateRequestClass,
+            '{{ namespacedStoreRequest }}' => $namespace.'\\'.$storeRequestClass,
+            '{{namespacedStoreRequest}}' => $namespace.'\\'.$storeRequestClass,
+            '{{ namespacedUpdateRequest }}' => $namespace.'\\'.$updateRequestClass,
+            '{{namespacedUpdateRequest}}' => $namespace.'\\'.$updateRequestClass,
+            '{{ namespacedRequests }}' => $namespacedRequests,
+            '{{namespacedRequests}}' => $namespacedRequests,
+        ]);
+    }
 }
