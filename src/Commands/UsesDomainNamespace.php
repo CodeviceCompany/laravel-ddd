@@ -103,6 +103,7 @@ trait UsesDomainNamespace
         }
 
         $namespace = str_replace('/', '\\', $this->rootNamespace());
+
         return rtrim($namespace, '\\');
     }
 }
