@@ -2,7 +2,6 @@
 
 namespace CodeviceCompany\LaravelDdd\Commands;
 
-
 use Illuminate\Database\Console\Factories\FactoryMakeCommand as BaseCommand;
 use Illuminate\Support\Str;
 
@@ -18,9 +17,8 @@ class FactoryMakeCommand extends BaseCommand
         if ($this->isCommandRegistered() && $namespace === 'Database\Factories') {
             $domainNamespace = str_replace('/', '\\', $this->rootNamespace());
 
-            $namespace = $domainNamespace . 'Factories';
+            $namespace = $domainNamespace.'Factories';
         }
-
 
         return $namespace;
     }
@@ -28,14 +26,13 @@ class FactoryMakeCommand extends BaseCommand
     /**
      * Get the destination class path.
      *
-     * @param string $name
-     * @return string
+     * @param  string  $name
      */
     protected function getPath($name): string
     {
-        $name = (string)Str::of($name)->replaceFirst($this->rootNamespace(), '')->finish('Factory');
+        $name = (string) Str::of($name)->replaceFirst($this->rootNamespace(), '')->finish('Factory');
         $namespace = str_replace('\\', '/', $this->rootNamespace());
 
-        return 'src/' . $namespace . 'Factories/' . str_replace('\\', '/', $name) . '.php';
+        return 'src/'.$namespace.'Factories/'.str_replace('\\', '/', $name).'.php';
     }
 }
