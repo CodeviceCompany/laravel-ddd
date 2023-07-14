@@ -24,5 +24,6 @@ return [
         'make:middleware' => Commands\MiddlewareMakeCommand::class,
         'make:controller' => Commands\ControllerMakeCommand::class,
         'make:factory' => Commands\FactoryMakeCommand::class,
+        'make:stub' => Commands\StubPublishCommand::class,
     ],
 ];
