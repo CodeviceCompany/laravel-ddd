@@ -2,6 +2,8 @@
 
 namespace CodeviceCompany\LaravelDdd;
 
+use Illuminate\Support\Facades\Process;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -39,6 +41,26 @@ class LaravelDddServiceProvider extends PackageServiceProvider
                 Commands\ControllerMakeCommand::class,
                 Commands\FactoryMakeCommand::class,
                 Commands\StubPublishCommand::class,
-            ]);
+                Commands\MakeActionCommand::class,
+                Commands\DataMakeCommand::class,
+            ])->hasInstallCommand(function (InstallCommand $command) {
+                $command
+                    ->publishConfigFile()
+                    ->copyAndRegisterServiceProviderInApp()
+                    ->askToStarRepoOnGitHub('codevicecompany/laravel-ddd')
+                    ->endWith(function (InstallCommand $installCommand) {
+                        $installCommand->info('Installing spatie/laravel-data');
+
+                        Process::run('composer require spatie/laravel-data', function (string $type, string $output) {
+                            echo $output;
+                        });
+
+                        $installCommand->info('Installing lorisleiva/laravel-actions');
+
+                        Process::run('composer require lorisleiva/laravel-actions', function (string $type, string $output) {
+                            echo $output;
+                        });
+                    });
+            });
     }
 }

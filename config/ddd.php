@@ -25,5 +25,7 @@ return [
         'make:controller' => Commands\ControllerMakeCommand::class,
         'make:factory' => Commands\FactoryMakeCommand::class,
         'make:stub' => Commands\StubPublishCommand::class,
+        'ddd:make:action' => Commands\MakeActionCommand::class,
+        'ddd:make:data' => Commands\DataMakeCommand::class,
     ],
 ];

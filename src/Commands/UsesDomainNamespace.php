@@ -9,7 +9,7 @@ trait UsesDomainNamespace
 {
     protected function rootNamespace(): string
     {
-        if ($this->isCommandRegistered() && $this->option('domain')) {
+        if ($this->isCommandRegistered() && $this->hasOption('domain')) {
             return str($this->option('domain'))->finish('\\')->prepend('Domain\\')->toString();
         }
 
@@ -64,7 +64,7 @@ trait UsesDomainNamespace
         return $this->runCommand($command, $this->appendArgumentsWithDomain($arguments), $this->output);
     }
 
-    protected function resolveStubPath($stub)
+    protected function resolveStubPath($stub): string
     {
         return file_exists($customPath = $this->laravel->basePath(trim($stub, '/')))
             ? $customPath
