@@ -12,18 +12,18 @@ class StubPublishCommand extends BaseCommand
     {
         parent::handle();
 
-        if (!is_dir($stubsPath = $this->laravel->basePath('stubs'))) {
+        if (! is_dir($stubsPath = $this->laravel->basePath('stubs'))) {
             (new Filesystem)->makeDirectory($stubsPath);
         }
 
         $stubs = [
-            __DIR__ . '/stubs/model.stub' => 'model.stub',
+            __DIR__.'/stubs/model.stub' => 'model.stub',
         ];
 
         $this->laravel['events']->dispatch($event = new PublishingStubs($stubs));
 
         foreach ($event->stubs as $from => $to) {
-            $to = $stubsPath . DIRECTORY_SEPARATOR . ltrim($to, DIRECTORY_SEPARATOR);
+            $to = $stubsPath.DIRECTORY_SEPARATOR.ltrim($to, DIRECTORY_SEPARATOR);
             file_put_contents($to, file_get_contents($from));
         }
     }
