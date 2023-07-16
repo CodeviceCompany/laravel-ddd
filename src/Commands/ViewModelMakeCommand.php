@@ -12,6 +12,7 @@ class ViewModelMakeCommand extends GeneratorCommand
     use CreatesMatchingTest;
 
     protected $name = 'ddd:make:view-model';
+
     protected $description = 'Create a new ViewModel class';
 
     protected $type = 'ViewModel';
@@ -39,7 +40,7 @@ class ViewModelMakeCommand extends GeneratorCommand
     {
         return [
             ['force', null, InputOption::VALUE_NONE, 'Create the class even if the view-model already exists'],
-            ['domain', 'D', InputOption::VALUE_REQUIRED, 'Create the model under given domain']
+            ['domain', 'D', InputOption::VALUE_REQUIRED, 'Create the model under given domain'],
         ];
     }
 }

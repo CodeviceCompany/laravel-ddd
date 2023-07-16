@@ -110,7 +110,7 @@ class MakeActionCommand extends GeneratorCommand
     {
         return [
             ['data', 'd', InputOption::VALUE_NONE, 'Create a new data object for action.'],
-            ['domain', 'D', InputOption::VALUE_REQUIRED, 'Create the model under given domain']
+            ['domain', 'D', InputOption::VALUE_REQUIRED, 'Create the model under given domain'],
         ];
     }
 
