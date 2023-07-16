@@ -74,6 +74,11 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
 
+## Todo
+
+- [ ] publish `Application.php` to app folder
+- [ ] override `bootstrap/app.php`  to use the new `Application.php`
+
 ## Credits
 
 - [Amine TIYAL](https://github.com/codevicecompany)
