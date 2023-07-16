@@ -43,6 +43,7 @@ class LaravelDddServiceProvider extends PackageServiceProvider
                 Commands\StubPublishCommand::class,
                 Commands\MakeActionCommand::class,
                 Commands\DataMakeCommand::class,
+                Commands\ViewModelMakeCommand::class,
             ])->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()
@@ -50,14 +51,17 @@ class LaravelDddServiceProvider extends PackageServiceProvider
                     ->askToStarRepoOnGitHub('codevicecompany/laravel-ddd')
                     ->endWith(function (InstallCommand $installCommand) {
                         $installCommand->info('Installing spatie/laravel-data');
-
                         Process::run('composer require spatie/laravel-data', function (string $type, string $output) {
                             echo $output;
                         });
 
                         $installCommand->info('Installing lorisleiva/laravel-actions');
-
                         Process::run('composer require lorisleiva/laravel-actions', function (string $type, string $output) {
+                            echo $output;
+                        });
+
+                        $installCommand->info('Installing spatie/laravel-view-models');
+                        Process::run('composer require spatie/laravel-view-models', function (string $type, string $output) {
                             echo $output;
                         });
                     });

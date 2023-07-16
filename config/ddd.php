@@ -27,5 +27,6 @@ return [
         'make:stub' => Commands\StubPublishCommand::class,
         'ddd:make:action' => Commands\MakeActionCommand::class,
         'ddd:make:data' => Commands\DataMakeCommand::class,
+        'ddd:make:view-model' => Commands\ViewModelMakeCommand::class,
     ],
 ];
