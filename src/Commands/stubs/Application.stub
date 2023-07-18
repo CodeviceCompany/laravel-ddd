@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeviceCompany\LaravelDdd;
+namespace App;
 
 class Application extends \Illuminate\Foundation\Application
 {

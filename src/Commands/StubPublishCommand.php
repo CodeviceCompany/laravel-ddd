@@ -15,7 +15,7 @@ class StubPublishCommand extends BaseCommand
         }
 
         $stubs = [
-            __DIR__.'/stubs/action.data.php' => 'action.data.php',
+            __DIR__.'/stubs/action.data.stub' => 'action.data.php',
             __DIR__.'/stubs/action.stub' => 'action.stub',
             __DIR__.'/stubs/data.stub' => 'data.stub',
             __DIR__.'/stubs/view-model.stub' => 'view-model.stub',
